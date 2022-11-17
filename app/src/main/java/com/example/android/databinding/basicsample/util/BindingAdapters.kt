@@ -63,7 +63,7 @@ fun tintPopularity(view: ProgressBar, popularity: Popularity) {
  *  Showcases Binding Adapters with multiple attributes. Note that this adapter is called
  *  whenever any of the attribute changes.
  */
-@BindingAdapter(value = ["app:progressScaled", "android:max"], requireAll = true)
+@BindingAdapter(value = ["app:progressScaled", "android:max"], requireAll = true) // not used if any attributes are missing
 fun setProgress(progressBar: ProgressBar, likes: Int, max: Int) {
     progressBar.progress = (likes * max / 5).coerceAtMost(max)
 }
@@ -72,9 +72,10 @@ fun setProgress(progressBar: ProgressBar, likes: Int, max: Int) {
  * Unused Binding Adapter to replace the Binding Converter that hides a view if the number
  * of likes is zero.
  */
-@BindingAdapter("app:hideIfZero")
+@BindingAdapter("app:hideIfZero") // apply to a specific attribute but could be applied to every view
 fun hideIfZero(view: View, number: Int) {
-    view.visibility = if (number == 0) View.GONE else View.VISIBLE
+    // take an integer that should be what the layout expression returns
+    view.visibility = if (number == 0) View.GONE else View.VISIBLE // make the view gone if the number is 0
 }
 
 private fun getAssociatedColor(popularity: Popularity, context: Context): Int {
